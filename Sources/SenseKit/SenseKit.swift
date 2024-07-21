@@ -8,60 +8,111 @@
 import Foundation
 import CoreMotion
 
-class SenseKit {
-    struct AltimeterData {
-        var pressure: Double
-        var relativeAltitude: Double
-        var altitude: Double
-        var accuracy: Double
-        var precision: Double
+public class SenseKit {
+    public struct AltimeterData {
+        public var pressure: Double
+        public var relativeAltitude: Double
+        public var altitude: Double
+        public var accuracy: Double
+        public var precision: Double
+        
+        public init(pressure: Double, relativeAltitude: Double, altitude: Double, accuracy: Double, precision: Double) {
+            self.pressure = pressure
+            self.relativeAltitude = relativeAltitude
+            self.altitude = altitude
+            self.accuracy = accuracy
+            self.precision = precision
+        }
     }
 
-    struct MagneticField {
-        var x: Double
-        var y: Double
-        var z: Double
+    public struct MagneticField {
+        public var x: Double
+        public var y: Double
+        public var z: Double
+        
+        public init(x: Double, y: Double, z: Double) {
+            self.x = x
+            self.y = y
+            self.z = z
+        }
     }
 
-    struct Quaternion {
-        var x: Double
-        var y: Double
-        var z: Double
-        var w: Double
+    public struct Quaternion {
+        public var x: Double
+        public var y: Double
+        public var z: Double
+        public var w: Double
+        
+        public init(x: Double, y: Double, z: Double, w: Double) {
+            self.x = x
+            self.y = y
+            self.z = z
+            self.w = w
+        }
     }
 
-    struct RotationMatrix {
-        var m11: Double
-        var m12: Double
-        var m13: Double
-        var m21: Double
-        var m22: Double
-        var m23: Double
-        var m31: Double
-        var m32: Double
-        var m33: Double
+    public struct RotationMatrix {
+        public var m11: Double
+        public var m12: Double
+        public var m13: Double
+        public var m21: Double
+        public var m22: Double
+        public var m23: Double
+        public var m31: Double
+        public var m32: Double
+        public var m33: Double
+        
+        public init(m11: Double, m12: Double, m13: Double, m21: Double, m22: Double, m23: Double, m31: Double, m32: Double, m33: Double) {
+            self.m11 = m11
+            self.m12 = m12
+            self.m13 = m13
+            self.m21 = m21
+            self.m22 = m22
+            self.m23 = m23
+            self.m31 = m31
+            self.m32 = m32
+            self.m33 = m33
+        }
     }
 
-    struct Acceleration {
-        var x: Double
-        var y: Double
-        var z: Double
+    public struct Acceleration {
+        public var x: Double
+        public var y: Double
+        public var z: Double
+        
+        public init(x: Double, y: Double, z: Double) {
+            self.x = x
+            self.y = y
+            self.z = z
+        }
     }
 
-    struct RotationRate {
-        var x: Double
-        var y: Double
-        var z: Double
+    public struct RotationRate {
+        public var x: Double
+        public var y: Double
+        public var z: Double
+        
+        public init(x: Double, y: Double, z: Double) {
+            self.x = x
+            self.y = y
+            self.z = z
+        }
     }
 
-    struct Gravity {
-        var x: Double
-        var y: Double
-        var z: Double
+    public struct Gravity {
+        public var x: Double
+        public var y: Double
+        public var z: Double
+        
+        public init(x: Double, y: Double, z: Double) {
+            self.x = x
+            self.y = y
+            self.z = z
+        }
     }
 }
 
-class SensorManager: ObservableObject {
+public class SensorManager: ObservableObject {
     private var altimeter = CMAltimeter()
     private var motionManager = CMMotionManager()
     
@@ -71,27 +122,29 @@ class SensorManager: ObservableObject {
     private let gyroQueue = OperationQueue()
     private let deviceMotionQueue = OperationQueue()
     
-    @Published var altimeterData = SenseKit.AltimeterData(pressure: 0, relativeAltitude: 0, altitude: 0, accuracy: 0, precision: 0)
-    @Published var magneticField = SenseKit.MagneticField(x: 0, y: 0, z: 0)
-    @Published var quaternion = SenseKit.Quaternion(x: 0, y: 0, z: 0, w: 0)
-    @Published var rotationMatrix = SenseKit.RotationMatrix(m11: 0, m12: 0, m13: 0, m21: 0, m22: 0, m23: 0, m31: 0, m32: 0, m33: 0)
-    @Published var calibratedMagneticField = SenseKit.MagneticField(x: 0, y: 0, z: 0)
-    @Published var acceleration = SenseKit.Acceleration(x: 0, y: 0, z: 0)
-    @Published var userAcceleration = SenseKit.Acceleration(x: 0, y: 0, z: 0)
-    @Published var rotationRate = SenseKit.RotationRate(x: 0, y: 0, z: 0)
-    @Published var calibratedRotationRate = SenseKit.RotationRate(x: 0, y: 0, z: 0)
-    @Published var gravity = SenseKit.Gravity(x: 0, y: 0, z: 0)
-    @Published var pitch: Double = 0.0
-    @Published var yaw: Double = 0.0
-    @Published var roll: Double = 0.0
-    @Published var heading: Double = 0.0
+    @Published public var altimeterData = SenseKit.AltimeterData(pressure: 0, relativeAltitude: 0, altitude: 0, accuracy: 0, precision: 0)
+    @Published public var magneticField = SenseKit.MagneticField(x: 0, y: 0, z: 0)
+    @Published public var quaternion = SenseKit.Quaternion(x: 0, y: 0, z: 0, w: 0)
+    @Published public var rotationMatrix = SenseKit.RotationMatrix(m11: 0, m12: 0, m13: 0, m21: 0, m22: 0, m23: 0, m31: 0, m32: 0, m33: 0)
+    @Published public var calibratedMagneticField = SenseKit.MagneticField(x: 0, y: 0, z: 0)
+    @Published public var acceleration = SenseKit.Acceleration(x: 0, y: 0, z: 0)
+    @Published public var userAcceleration = SenseKit.Acceleration(x: 0, y: 0, z: 0)
+    @Published public var rotationRate = SenseKit.RotationRate(x: 0, y: 0, z: 0)
+    @Published public var calibratedRotationRate = SenseKit.RotationRate(x: 0, y: 0, z: 0)
+    @Published public var gravity = SenseKit.Gravity(x: 0, y: 0, z: 0)
+    @Published public var pitch: Double = 0.0
+    @Published public var yaw: Double = 0.0
+    @Published public var roll: Double = 0.0
+    @Published public var heading: Double = 0.0
 
-    func start() {
+    public init() {}
+
+    public func start() {
         startAltimeter()
         startMotionUpdates()
     }
 
-    func stop() {
+    public func stop() {
         altimeter.stopAbsoluteAltitudeUpdates()
         altimeter.stopRelativeAltitudeUpdates()
         motionManager.stopGyroUpdates()
